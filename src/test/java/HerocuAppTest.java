@@ -1,5 +1,6 @@
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -7,8 +8,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 @Listeners(Listener.class)
 public class HerocuAppTest extends TestBase {
-    
-    @Test
+
+    @TestCaseId("HAT-1")
+    @Test(groups = { "iFrame" }, description = "Switch between  frames")
     public void iFrameTest() {
         open("https://the-internet.herokuapp.com/iframe");
         switchTo().innerFrame("mce_0_ifr");
@@ -23,15 +25,17 @@ public class HerocuAppTest extends TestBase {
         $("#tinymce").shouldHave(text("Hello \uFEFFworld!"));
     }
 
-    @Test
-    public void AlertAcceptTest() {
+    @TestCaseId("HAT-2")
+    @Test(groups = { "Alert" }, description="Alert dismiss")
+    public void AlertDismissTest() {
         open("https://the-internet.herokuapp.com/javascript_alerts");
         $(byXpath("//*[contains(text(),'Click for JS Confirm')]")).click();
         dismiss();
         $("#result").shouldHave(text("You clicked: Cancel"));
     }
 
-    @Test
+    @TestCaseId("HAT-3")
+    @Test(groups = { "Alert" }, description="Alert prompt text into input field on alert")
     public void AlertClickPromptTest() {
         open("https://the-internet.herokuapp.com/javascript_alerts");
         $(byXpath("//*[contains(text(),'Click for JS Prompt')]")).click();
