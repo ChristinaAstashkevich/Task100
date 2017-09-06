@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import static com.codeborne.selenide.Selenide.close;
 
 public class TestBase {
+
     static WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
@@ -14,6 +15,7 @@ public class TestBase {
         System.setProperty("webdriver.chrome.driver", ".\\drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         WebDriverRunner.setWebDriver(driver);
+        //WebDriverRunner.getWebDriver(driver);
     }
 
     @AfterMethod
